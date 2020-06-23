@@ -17,6 +17,9 @@ function App() {
 
   return (
     <div className="App">
+    {courseObjects.map( (course) => {
+      <p key={course.id}>{course.title}</p>
+    })}
     </div>
   );
 }
