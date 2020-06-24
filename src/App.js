@@ -1,26 +1,28 @@
 import React, {useState, useEffect} from 'react';
-import '../styles/global.css';
+import './styles/global.css';
+import Courses from './components/Courses';
+import { 
+  BrowserRouter as Router
+ } from 'react-router-dom';
 
 function App() {
 
-  // useEffect(() => {
-  //   fetchCourses();
-  // });
+  const [courseObjects, setCourses] = useState([]);
 
-  // const [courseObjects, setCourses] = useState([]);
-  
-  // const fetchCourses = async () => {
-  //   const data = await fetch('http://localhost:5000/api/courses');
-  //   const courses = await data.json();
-  //   setCourses(courses.courses);
-  // }; 
+  useEffect(() => {
+    fetch('http://localhost:5000/api/courses')
+    .then(response => response.json())
+    .then(data => setCourses(data.courses))
+  }, []);
+
+  console.log(courseObjects);
 
   return (
-    <div className="App">
-    {/* {courseObjects.map( (course) => (
-      <p key={course.id}>{course.title}</p>
-    ))} */}
-    </div>
+    <Router>
+      <div className="App">
+        <Courses courses={courseObjects}/>
+      </div>
+    </Router>
   );
 }
 
