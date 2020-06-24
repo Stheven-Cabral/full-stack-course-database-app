@@ -1,13 +1,25 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 
-class Courses extends Components {
+class Courses extends Component {
   constructor () {
     super();
     this.state = {
       courses: []
     };
   };
+
+  fetchCourses = async () => {
+    const data = await fetch('http://localhost:5000/api/courses');
+    const courses = await data.json();
+    this.setState({
+      courses: courses.courses  
+    });
+  }; 
+
+  componentDidMount() {
+    this.fetchCourses();
+  }
 
   render() {
     return (
@@ -26,6 +38,7 @@ class Courses extends Components {
 
         <div className="bounds">
           <div className="grid-33">
+          {/* Set Coueses using map */}
             <Link className="course--module course--link" to="course-detail.html">
               <h4 className="course--label">Course</h4>
               <h3 className="course--title">Build a Basic Bookcase</h3>
