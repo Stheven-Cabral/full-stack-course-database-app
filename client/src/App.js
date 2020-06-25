@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import './styles/global.css';
 import Courses from './components/Courses';
 import { 
@@ -9,11 +9,11 @@ function App() {
 
   const [courseObjects, setCourses] = useState([]);
 
-  useEffect(() => {
-    fetch('http://localhost:5000/api/courses')
-    .then(response => response.json())
-    .then(data => setCourses(data.courses))
-  }, []);
+
+  fetch('http://localhost:5000/api/courses')
+  .then(response => response.json())
+  .then(data => setCourses(data.courses))
+
 
   console.log(courseObjects);
 
