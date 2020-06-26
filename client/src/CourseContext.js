@@ -1,25 +1,35 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { createContext, Component } from 'react';
 
 export const CourseContext = createContext();
 
-export const CourseProvider = (props) => {
+export class CourseProvider extends Component {
+  state = {
+    data: []
+  }
 
-  const [courseObjects, setCourses] = useState([]);
-
-  const fetchCourses = async () => {
+  fetchCourses = async () => {
     const coursesFetch = await fetch('http://localhost:5000/api/courses');
     const data = await coursesFetch.json();
-    return data;
+    this.setState({
+      data: data
+    })
+    console.log(this.state.data);
   };
-  
-  useEffect(async () => {
-    const courses = await fetchCourses();
-    await setCourses(courses);
-  })
 
-  return (
-    <CourseContext.Provider value={courseObjects.courses}>
-      {props.children}
-    </CourseContext.Provider>
-  );
+  componentDidMount(){
+    this.fetchCourses();
+  }
+
+  render() {
+    return (
+      <CourseContext.Provider value={this.state.data}>
+        {this.props.children}
+      </CourseContext.Provider>
+    );
+  }
 }
+
+  
+  
+
+  

@@ -4,7 +4,7 @@ import Courses from './components/Courses';
 import { 
   BrowserRouter as Router
  } from 'react-router-dom';
-import { CourseProvider } from './courseContext';
+import { CourseProvider } from './CourseContext';
 
 function App() {
 

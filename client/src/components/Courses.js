@@ -1,11 +1,20 @@
-import React, {Component, useContext} from 'react';
+import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { CourseContext } from '../CourseContext';
 
 class Courses extends Component {
+  static contextType = CourseContext
+
   state = {
-      courses: this.context
+    courses: []
   };
+
+  componentDidMount() {
+    this.setState({
+      courses: this.context
+    });
+    console.log(this.state.courses);
+  }
 
   render() {
     return (
@@ -47,6 +56,5 @@ class Courses extends Component {
     )
   }
 }
-Courses.contextType = CourseContext;
 
 export default Courses;
