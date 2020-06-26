@@ -18,7 +18,7 @@ export const CourseProvider = (props) => {
   })
 
   return (
-    <CourseContext.Provider courses={courseObjects}>
+    <CourseContext.Provider value={courseObjects.courses}>
       {props.children}
     </CourseContext.Provider>
   );

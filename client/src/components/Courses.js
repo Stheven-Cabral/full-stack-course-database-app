@@ -1,26 +1,11 @@
-import React, {Component} from 'react';
+import React, {Component, useContext} from 'react';
 import { Link } from 'react-router-dom';
+import CourseContext from '../CourseContext';
 
 class Courses extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      courses: this.props.courses
-    };
+  state = {
+      courses: this.context
   };
-  
-  
-  // fetchCourses = async () => {
-  //   const data = await fetch('http://localhost:5000/api/courses');
-  //   const courses = await data.json();
-  //   this.setState({
-  //     courses: courses.courses  
-  //   });
-  // }; 
-
-  // componentDidMount() {
-  //   this.fetchCourses();
-  // }
 
   render() {
     return (
@@ -62,5 +47,6 @@ class Courses extends Component {
     )
   }
 }
+Courses.contextType = CourseContext;
 
 export default Courses;
