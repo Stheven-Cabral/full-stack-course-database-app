@@ -13,7 +13,7 @@ class Courses extends Component {
     this.setState({
       courses: this.context
     });
-    console.log(this.state.courses);
+    console.log(this.context);
   }
 
   render() {
