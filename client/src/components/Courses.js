@@ -1,6 +1,6 @@
 import React, {Component, useContext} from 'react';
 import { Link } from 'react-router-dom';
-import CourseContext from '../CourseContext';
+import { CourseContext } from '../CourseContext';
 
 class Courses extends Component {
   state = {
