@@ -1,35 +1,45 @@
 import React, { createContext, Component } from 'react';
 
-export const CourseContext = createContext();
+const Context = React.createContext();
 
-export class CourseProvider extends Component {
+export class Provider extends Component {
   state = {
-    data: []
+    authenticatedUser: null,
   }
 
-  fetchCourses = async () => {
-    const coursesFetch = await fetch('http://localhost:5000/api/courses');
-    const data = await coursesFetch.json();
-    this.setState({
-      data: data
-    })
-    console.log(this.state.data);
-  };
-
-  componentDidMount(){
-    this.fetchCourses();
+  constructor() {
+    super();
   }
 
   render() {
-    return (
-      <CourseContext.Provider value={this.state.data}>
+    const authenticatedUser = this.state.authenticatedUser;
+
+    const value = {
+      authenticatedUser: authenticatedUser
+    }
+
+    return(
+      <Context.Provider value={value}>
         {this.props.children}
-      </CourseContext.Provider>
-    );
+      </Context.Provider>
+    )
   }
 }
 
-  
-  
+export const Consumer = Context.Consumer;
 
-  
+/**
+ * A higher-order component that wraps the provided component in a Context Consumer component.
+ * @param {class} Component - A React component.
+ * @returns {function} A higher-order component.
+ */
+
+export default function withContext(Component) {
+  return function ContextComponent(props) {
+    return (
+      <Context.Consumer>
+        {context => <Component {...props} context={context} />}
+      </Context.Consumer>
+    );
+  }
+}
