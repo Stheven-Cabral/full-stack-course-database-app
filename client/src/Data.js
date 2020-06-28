@@ -2,19 +2,18 @@ import config from './config';
 
 export default class Data {
   api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
-//     const url = config.apiBaseUrl + path;
+    const url = config.apiBaseUrl + path;
   
-//     const options = {
-//       method,
-//       headers: {
-//         'Content-Type': 'application/json; charset=utf-8',
-//       },
-    // };
+    const options = {
+      method,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+    };
 
-//     if (body !== null) {
-//       // he JSON. stringify() method converts a JavaScript object or value to a JSON string, optionally replacing values if a replacer function is specified or optionally including only the specified properties if a replacer array is specified.
-//       options.body = JSON.stringify(body);
-//     }
+    if (body !== null) {
+      options.body = JSON.stringify(body);
+    }
 
 //     // User Authorization
 //     if (requiresAuth) {    
@@ -23,7 +22,17 @@ export default class Data {
 //       options.headers['Authorization'] = `Basic ${encodedCredentials}`;
 //     }  
 
-//     return fetch(url, options);
+    return fetch(url, options);
+  }
+
+  async getCourses() {
+    const response = await this.api(`/courses`, 'GET', null, false, null);
+    if (response.status === 200) {
+      return response.json().then(data => data);
+    }
+    else if (response.status === 401) {
+      return null;
+    }
   }
 
 //   async getUser(username, password) {
