@@ -10,7 +10,7 @@ export default class Header extends Component {
       <React.Fragment>
         <div className="header">
           <div className="bounds">
-            <h1 className="header--logo">Courses</h1>
+            <Link className="header--logo" to='/'>Courses</Link>
             <nav>
               {authenticatedUser ?
                 <React.Fragment>
