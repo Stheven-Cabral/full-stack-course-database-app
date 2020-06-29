@@ -1,5 +1,4 @@
 import React from 'react';
-import Courses from './components/Courses';
 import { 
   BrowserRouter as Router,
   Route,
@@ -7,13 +6,15 @@ import {
  } from 'react-router-dom';
  import withContext from './Context';
 
+ import Courses from './components/Courses';
+
  const CoursesWithContext = withContext(Courses);
 
 export default () => (
     <Router>
       <div>
         <Switch>
-          <Route path="/courses" component={CoursesWithContext}/>
+          <Route path="/courses" component={CoursesWithContext} />
         </Switch>
       </div>
     </Router>

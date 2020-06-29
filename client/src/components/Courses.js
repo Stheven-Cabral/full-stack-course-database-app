@@ -2,19 +2,21 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 
 export default class Courses extends Component {
-  static contextType = CourseContext
 
   state = {
     courses: []
   };
 
+  componentDidMount() {
+    const { context } = this.props;
+    context.data.getCourses()
+    .then(response => {
+      console.log(response);
+      this.setState({courses: response.courses});
+    });
+  }
+
   render() {
-    const { context } = this.props
-
-    this.setState({
-      courses: context.data.getCourses.courses
-    })
-
     return (
       <div>
         <div className="header">
