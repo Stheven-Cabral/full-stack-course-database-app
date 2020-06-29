@@ -50,6 +50,20 @@ export default class Data {
       throw new Error ()
     }
   }
+
+  async deleteCourse(courseId) {
+    // Should be authenticated. Fix later
+    const response = await this.api(`/courses/${courseId}`, 'DELETE', null, false, null);
+    if (response.status === 204) {
+      return {}
+    }
+    else if (response.status === 403) {
+      return null;
+    }
+    // else {
+    //   throw new Error ()
+    // }
+  }
 //   async getUser(username, password) {
 //     const response = await this.api(`/users`, 'GET', null, true, {username, password});
 //     if (response.status === 200) {

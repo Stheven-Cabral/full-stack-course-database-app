@@ -14,7 +14,13 @@ export default class CourseDetail extends Component {
     
     context.data.getCourseDetails(courseId)
     .then(response => {
-      const materials = response.course.materialsNeeded.split('\n');
+      let materials = response.course.materialsNeeded;
+
+      if(materials !== null) {
+        materials = materials.split('\n');
+      } else {
+        materials = [];
+      }
 
       this.setState({
         courseDetails: response.course,
@@ -38,9 +44,9 @@ export default class CourseDetail extends Component {
             <div className="grid-100">
               <span>
                 <Link className="button" to="/update-course">Update Course</Link>
-                <Link className="button" to="#">Delete Course</Link>
+                <Link className="button" to={`/delete/${courseDetails.id}`}>Delete Course</Link>
               </span>
-              <Link className="button button-secondary" to="index.html">Return to List</Link>
+              <Link className="button button-secondary" to="/">Return to List</Link>
             </div>
           </div>
         </div>
