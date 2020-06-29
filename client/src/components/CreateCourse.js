@@ -22,14 +22,17 @@ export default class CreateCourse extends Component {
             <div className="grid-66">
               <div className="course--header">
                 <h4 className="course--label">Course</h4>
-                <div><input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..."
-                    value="" /></div>
-                <p>By </p>
+                <div>
+                  <input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..."value="" />
+                </div>
+                <p>By</p>
               </div>
+
               <div className="course--description">
                 <div><textarea id="description" name="description" className="" placeholder="Course description..."></textarea></div>
               </div>
             </div>
+            
             <div className="grid-25 grid-right">
               <div className="course--stats">
                 <ul className="course--stats--list">
