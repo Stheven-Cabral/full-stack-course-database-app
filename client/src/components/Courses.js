@@ -17,19 +17,7 @@ export default class Courses extends Component {
 
   render() {
     return (
-      <div>
-        <div className="header">
-          <div className="bounds">
-            <h1 className="header--logo">Courses</h1>
-            <nav>
-              <Link className="signup" to='/signup'>Sign Up</Link>
-              <Link className="signin" to='/signin'>Sign In</Link>
-            </nav>
-          </div>
-        </div>
-
-        <hr />
-
+      <React.Fragment>
         <div className="bounds">
           <div className="grid-33">
             {this.state.courses.map(course => 
@@ -51,7 +39,7 @@ export default class Courses extends Component {
             </Link>
           </div>
         </div>
-      </div>
+      </React.Fragment>
     )
   }
 }
