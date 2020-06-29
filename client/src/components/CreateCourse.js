@@ -29,7 +29,9 @@ export default class CreateCourse extends Component {
               </div>
 
               <div className="course--description">
-                <div><textarea id="description" name="description" className="" placeholder="Course description..."></textarea></div>
+                <div>
+                  <textarea id="description" name="description" className="" placeholder="Course description..."></textarea>
+                </div>
               </div>
             </div>
             
@@ -38,9 +40,11 @@ export default class CreateCourse extends Component {
                 <ul className="course--stats--list">
                   <li className="course--stats--list--item">
                     <h4>Estimated Time</h4>
-                    <div><input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input"
-                        placeholder="Hours" value="" /></div>
+                    <div>
+                      <input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" value="" />
+                    </div>
                   </li>
+                  
                   <li className="course--stats--list--item">
                     <h4>Materials Needed</h4>
                     <div><textarea id="materialsNeeded" name="materialsNeeded" className="" placeholder="List materials..."></textarea></div>
@@ -48,7 +52,11 @@ export default class CreateCourse extends Component {
                 </ul>
               </div>
             </div>
-            <div className="grid-100 pad-bottom"><button className="button" type="submit">Create Course</button><button className="button button-secondary" onclick="event.preventDefault(); location.href='index.html';">Cancel</button></div>
+            
+            <div className="grid-100 pad-bottom">
+              <button className="button" type="submit">Create Course</button>
+              <button className="button button-secondary" onclick="event.preventDefault(); location.href='index.html';">Cancel</button>
+            </div>
           </form>
         </div>
       </div>
