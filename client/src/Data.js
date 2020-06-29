@@ -34,10 +34,22 @@ export default class Data {
       return null;
     }
     else {
-      throw new Error ("I'm Sorry. An Error Occurred.")
+      throw new Error ()
     }
   }
 
+  async getCourseDetails(courseId) {
+    const response = await this.api(`/courses/${courseId}`, 'GET', null, false, null);
+    if (response.status === 200) {
+      return response.json().then(data => data);
+    }
+    else if (response.status === 400) {
+      return null;
+    }
+    else {
+      throw new Error ()
+    }
+  }
 //   async getUser(username, password) {
 //     const response = await this.api(`/users`, 'GET', null, true, {username, password});
 //     if (response.status === 200) {

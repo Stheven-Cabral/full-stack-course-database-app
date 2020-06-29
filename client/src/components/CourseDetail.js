@@ -2,18 +2,40 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 export default class CourseDetail extends Component {
+  state = {
+    courseDetails: []
+  };
+
+  componentDidMount() {
+    const { context } = this.props;
+    const { courseId } = this.props.match.params;
+    
+    context.data.getCourseDetails(courseId)
+    .then(response => {
+      this.setState({courseDetails: response.course});
+      console.log(this.state.courseDetails.User.firstName);
+      console.log(this.state.courseDetails.User.lastName);
+    });
+  }
+  
   render() {
+    const {
+      courseDetails
+    } = this.state;
+
+    const firstName = courseDetails.User.firstName;
+    const lastName = courseDetails.User.lastName;
+    
     return (
-      // Header should be custom (view html)
       <div>
         <div className="actions--bar">
           <div className="bounds">
             <div className="grid-100">
               <span>
                 <Link className="button" to="/update-course">Update Course</Link>
-                <Link className="button" href="#">Delete Course</Link>
+                <Link className="button" to="#">Delete Course</Link>
               </span>
-              <Link className="button button-secondary" href="index.html">Return to List</Link>
+              <Link className="button button-secondary" to="index.html">Return to List</Link>
             </div>
           </div>
         </div>
@@ -21,8 +43,8 @@ export default class CourseDetail extends Component {
           <div className="grid-66">
             <div className="course--header">
               <h4 className="course--label">Course</h4>
-              <h3 className="course--title">Build a Basic Bookcase</h3>
-              <p>By Joe Smith</p>
+              <h3 className="course--title">{courseDetails.title}</h3>
+              <p>{firstName} {lastName}</p>
             </div>
             <div className="course--description">
               <p>High-end furniture projects are great to dream about. But unless you have a well-equipped shop and some serious woodworking experience to draw on, it can be difficult to turn the dream into a reality.</p>
