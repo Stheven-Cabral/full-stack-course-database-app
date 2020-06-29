@@ -11,7 +11,6 @@ export default class Courses extends Component {
     const { context } = this.props;
     context.data.getCourses()
     .then(response => {
-      console.log(response);
       this.setState({courses: response.courses});
     });
   }
@@ -23,8 +22,8 @@ export default class Courses extends Component {
           <div className="bounds">
             <h1 className="header--logo">Courses</h1>
             <nav>
-              <Link className="signup" to='sign-up.html'>Sign Up</Link>
-              <Link className="signin" to='sign-in.html'>Sign Up</Link>
+              <Link className="signup" to='/signup'>Sign Up</Link>
+              <Link className="signin" to='/signin'>Sign In</Link>
             </nav>
           </div>
         </div>
