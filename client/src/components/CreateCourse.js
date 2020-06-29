@@ -9,7 +9,7 @@ export default class CreateCourse extends Component {
       <div className="bounds course--detail">
         <h1>Create Course</h1>
         <div>
-          <div>
+          {/* <div>
             <h2 className="validation--errors--label">Validation errors</h2>
             <div className="validation-errors">
               <ul>
@@ -17,14 +17,14 @@ export default class CreateCourse extends Component {
                 <li>Please provide a value for "Description"</li>
               </ul>
             </div>
-          </div>
+          </div> */}
           <form>
             <div className="grid-66">
               <div className="course--header">
                 <h4 className="course--label">Course</h4>
                 <div><input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..."
                     value="" /></div>
-                <p>By Joe Smith</p>
+                <p>By </p>
               </div>
               <div className="course--description">
                 <div><textarea id="description" name="description" className="" placeholder="Course description..."></textarea></div>
