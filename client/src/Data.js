@@ -30,8 +30,11 @@ export default class Data {
     if (response.status === 200) {
       return response.json().then(data => data);
     }
-    else if (response.status === 401) {
+    else if (response.status === 400) {
       return null;
+    }
+    else {
+      throw new Error ("I'm Sorry. An Error Occurred.")
     }
   }
 

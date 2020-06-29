@@ -1,22 +1,20 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-import { CourseContext } from '../CourseContext';
 
-class Courses extends Component {
+export default class Courses extends Component {
   static contextType = CourseContext
 
   state = {
     courses: []
   };
 
-  componentDidMount() {
-    this.setState({
-      courses: this.context
-    });
-    console.log(this.context);
-  }
-
   render() {
+    const { context } = this.props
+
+    this.setState({
+      courses: context.data.getCourses.courses
+    })
+
     return (
       <div>
         <div className="header">
@@ -56,5 +54,3 @@ class Courses extends Component {
     )
   }
 }
-
-export default Courses;
