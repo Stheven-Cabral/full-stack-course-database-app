@@ -22,9 +22,9 @@ export default class Courses extends Component {
           <div className="grid-33">
             {this.state.courses.map(course => 
               <Link className="course--module course--link" to="/course-detail">
-              <h4 className="course--label">Course</h4>
-              <h3 className="course--title">{course.title}</h3>
-            </Link>
+                <h4 className="course--label">Course</h4>
+                <h3 className="course--title">{course.title}</h3>
+              </Link>
             )}
           </div>
 

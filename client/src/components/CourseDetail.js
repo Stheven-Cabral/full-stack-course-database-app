@@ -8,8 +8,13 @@ export default class CourseDetail extends Component {
       <div>
         <div className="actions--bar">
           <div className="bounds">
-            <div className="grid-100"><span><Link className="button" to="/update-course">Update Course</Link><Link className="button" href="#">Delete Course</Link></span><Link
-                className="button button-secondary" href="index.html">Return to List</Link></div>
+            <div className="grid-100">
+              <span>
+                <Link className="button" to="/update-course">Update Course</Link>
+                <Link className="button" href="#">Delete Course</Link>
+              </span>
+              <Link className="button button-secondary" href="index.html">Return to List</Link>
+            </div>
           </div>
         </div>
         <div className="bounds course--detail">
