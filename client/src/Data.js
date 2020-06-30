@@ -58,7 +58,7 @@ export default class Data {
     }
     else if (response.status === 400 || response.status === 401) {
       return response.json().then(data => {
-        return data;
+        return data.error;
       });
     }
     else {
@@ -100,9 +100,9 @@ export default class Data {
     if (response.status === 201) {
       return [];
     }
-    else if (response.status === 400) {
+    else if (response.status === 400 || response.status === 405) {
       return response.json().then(data => {
-        return data.errors;
+        return data.error;
       });
     }
     else {

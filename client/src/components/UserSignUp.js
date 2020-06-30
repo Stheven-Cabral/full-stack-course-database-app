@@ -27,13 +27,27 @@ export default class UserSignUp extends Component {
         <div className="grid-33 centered signin">
           <h1>Sign Up</h1>
           <div>
-            <form>
+            {errors.length ?
+              <React.Fragment>
+                <h2 className="validation--errors--label">Validation errors</h2>
+                <div className="validation-errors">
+                  <ul>
+                    {errors.map((err, index) =>
+                      <li key={index}>{err}</li>
+                    )}
+                  </ul> 
+                </div>
+              </React.Fragment>
+              :
+              <hr />
+            }
+            <form onSubmit={this.submit}>
               <div><input onChange={this.change} id="firstName" name="firstName" type="text" className="" placeholder="First Name" value={firstName} /></div>
               <div><input onChange={this.change} id="lastName" name="lastName" type="text" className="" placeholder="Last Name" value={lastName} /></div>
               <div><input onChange={this.change} id="emailAddress" name="emailAddress" type="text" className="" placeholder="Email Address" value={emailAddress} /></div>
               <div><input onChange={this.change} id="password" name="password" type="password" className="" placeholder="Password" value={password} /></div>
               <div><input onChange={this.change} id="confirmPassword" name="confirmPassword" type="password" className="" placeholder="Confirm Password" value={confirmPassword} /></div>
-              <div className="grid-100 pad-bottom"><button className="button" type="submit">Sign Up</button><button className="button button-secondary" onclick={this.change}>Cancel</button></div>
+              <div className="grid-100 pad-bottom"><button className="button" type="submit">Sign Up</button><button className="button button-secondary" onClick={this.cancel}>Cancel</button></div>
             </form>
           </div>
           <p>&nbsp;</p>
@@ -47,12 +61,52 @@ export default class UserSignUp extends Component {
     const name = e.target.name;
     const value = e.target.value;
 
-    this.setState({
-      [name]: value
+    this.setState(() => {
+      return{
+        [name]: value
+      };
     });
   }
 
-  submit = (e) => {}
+  submit = (e) => {
+    e.preventDefault();
+    const { context } = this.props;
+
+    const {
+      firstName,
+      lastName,
+      emailAddress,
+      password,
+      confirmPassword,
+    } = this.state
+
+    // New user payload
+    const user = {
+      firstName,
+      lastName,
+      emailAddress,
+      password,
+      confirmPassword,
+    }
+
+    if (password !== confirmPassword) {
+      this.setState({
+        errors: ['Password and Confirm Password do not Match']
+      });
+    } else {
+      context.data.createUser(user)
+      .then(errors => {
+        console.log(errors);
+
+        if (errors.length) {
+          this.setState({ errors: errors});
+        } else {
+          context.action.signIn(emailAddress, password)
+          this.props.history.push('/');
+        }
+      })
+    }
+  }
 
   cancel = (e) => {
     e.preventDefault();

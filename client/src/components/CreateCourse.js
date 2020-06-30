@@ -35,8 +35,8 @@ export default class CreateCourse extends Component {
                 </ul> 
               </div>
             </React.Fragment>
-          : 
-          <hr />
+            : 
+            <hr />
           }
           <form onSubmit={this.create}>
             <div className="grid-66">
