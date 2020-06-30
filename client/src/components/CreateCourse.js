@@ -2,8 +2,43 @@ import React, {Component} from 'react';
 // import { Link } from 'react-router-dom';
 
 export default class CreateCourse extends Component {
+  state = {
+    title: '',
+    description: '',
+    estimatedTime: '',
+    materialsNeeded: '',
+    errors: [],
+  }
+
+  create = () => {
+    const {
+      name,
+      description,
+      estimatedTime,
+      materialsNeeded,
+    } = this.state;
+
+    // New course payload
+    const course = {
+      name,
+      description,
+      estimatedTime,
+      materialsNeeded,
+    }
+    
+  }
 
   render() {
+    const {
+      name,
+      description,
+      estimatedTime,
+      materialsNeeded,
+      errors,
+    } = this.state;
+
+
+
     return (
       // Requires a custom header. View html.
       <div className="bounds course--detail">
