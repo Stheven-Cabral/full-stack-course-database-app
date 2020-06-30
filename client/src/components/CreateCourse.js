@@ -29,8 +29,8 @@ export default class CreateCourse extends Component {
               <h2 className="validation--errors--label">Validation errors</h2>
               <div className="validation-errors">
                 <ul>
-                  {errors.map(err =>
-                    <li key={err}>{err}</li>
+                  {errors.map((err, index) =>
+                    <li key={index}>{err}</li>
                   )}
                 </ul> 
               </div>
@@ -136,7 +136,8 @@ export default class CreateCourse extends Component {
     });
   }
 
-  cancel = () => {
+  cancel = (e) => {
+    e.preventDefault();
     this.props.history.push('/');
   }
 }

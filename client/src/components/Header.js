@@ -14,7 +14,7 @@ export default class Header extends Component {
             <nav>
               {authenticatedUser ?
                 <React.Fragment>
-                  <span>Welcome, {authenticatedUser.name}!</span>
+                  <span>Welcome, {authenticatedUser.firstName}!</span>
                   <Link className="signout" to="/signout">Sign Out</Link>
                 </React.Fragment>
               :    

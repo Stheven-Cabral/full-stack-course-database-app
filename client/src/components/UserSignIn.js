@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 
-export default class UserSignUp extends Component {
+export default class UserSignIn extends Component {
   state = {
-    username: '',
+    emailAddress: '',
     password: '',
     errors: [],
   }
 
   render() {
     const {
-      username,
+      emailAddress,
       password,
-      // errors,
+      errors,  
     } = this.state;
 
     return (
@@ -20,10 +20,24 @@ export default class UserSignUp extends Component {
         <div className="grid-33 centered signin">
           <h1>Sign In</h1>
           <div>
-            <form>
-              <div><input id="emailAddress" name="emailAddress" type="text" className="" placeholder="Email Address" value={username} /></div>
-              <div><input id="password" name="password" type="password" className="" placeholder="Password" value={password} /></div>
-              <div className="grid-100 pad-bottom"><button className="button" type="submit">Sign In</button><button className="button button-secondary" onclick="event.preventDefault(); location.href='index.html';">Cancel</button></div>
+            {errors.length ? 
+              <React.Fragment>
+                <h2 className="validation--errors--label">Validation errors</h2>
+                <div className="validation-errors">
+                  <ul>
+                    {errors.map((err, index) =>
+                      <li key={index}>{err}</li>
+                    )}
+                  </ul> 
+                </div>
+              </React.Fragment>
+            : 
+            <hr />
+            }
+            <form onSubmit={this.submit}>
+              <div><input onChange={this.change} id="emailAddress" name="emailAddress" type="text" className="" placeholder="Email Address" value={emailAddress} /></div>
+              <div><input onChange={this.change} id="password" name="password" type="password" className="" placeholder="Password" value={password} /></div>
+              <div className="grid-100 pad-bottom"><button className="button" type="submit">Sign In</button><button className="button button-secondary" onClick={this.cancel}>Cancel</button></div>
             </form>
           </div>
           <p>&nbsp;</p>
@@ -31,5 +45,44 @@ export default class UserSignUp extends Component {
         </div>
       </div>
     )
+  }
+
+  change = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    this.setState(() => {
+      return {
+        [name]: value
+      };
+    });
+  }
+
+  submit = (e) => {
+    e.preventDefault();
+    const { context } = this.props;
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    const { emailAddress, password } = this.state;
+
+    context.actions.signIn(emailAddress, password)
+      .then( user => {
+        if (user === null) {
+          this.setState(() => {
+            return { errors: [ 'Sign-in was unsuccessful' ] };
+          });
+        } else {
+          this.props.history.push(from);
+          console.log(`SUCCESS! ${emailAddress} is now signed in!`);
+        }
+      })
+      .catch( err => {
+        console.log(err);
+        this.props.history.push('/error');
+      })
+  }
+
+  cancel = (e) => {
+    e.preventDefault();
+    this.props.history.push('/');
   }
 }
