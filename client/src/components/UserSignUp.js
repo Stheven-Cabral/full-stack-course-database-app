@@ -105,6 +105,11 @@ export default class UserSignUp extends Component {
           this.props.history.push('/');
         }
       })
+      // handle rejected promises
+      .catch(err => {
+        console.log(err);
+        // this.props.history.push('/error'); // push to history stack
+      })
     }
   }
 
