@@ -15,12 +15,12 @@ export default class Data {
       options.body = JSON.stringify(body);
     }
 
-//     // User Authorization
-//     if (requiresAuth) {    
-//       // The btoa() method creates a base-64 encoded ASCII string from a "string" of data. We'll use btoa() to encode the username and password credentials passed to the api() method. The credentials will be passed as an object containing username and password properties.
-//       const encodedCredentials = btoa(`${credentials.username}:${credentials.password}`);
-//       options.headers['Authorization'] = `Basic ${encodedCredentials}`;
-//     }  
+    // User Authorization
+    if (requiresAuth) {    
+      // The btoa() method creates a base-64 encoded ASCII string from a "string" of data. btoa() encodes the username and password credentials passed to the api() method. The credentials will be passed as an object containing emailAddress and password properties.
+      const encodedCredentials = btoa(`${credentials.emailAddress}:${credentials.password}`);
+      options.headers['Authorization'] = `Basic ${encodedCredentials}`;
+    }  
 
     return fetch(url, options);
   }
@@ -56,13 +56,13 @@ export default class Data {
     if (response.status === 201) {
       return [];
     }
-    else if (response.status === 400) {
+    else if (response.status === 400 || response.status === 401) {
       return response.json().then(data => {
-        return data.errors;
+        return data;
       });
     }
     else {
-      throw new Error ()
+      throw new Error ('Error: Something Went Wrong')
     }
   }
 
@@ -81,19 +81,21 @@ export default class Data {
       throw new Error ()
     }
   }
-//   async getUser(username, password) {
-//     const response = await this.api(`/users`, 'GET', null, true, {username, password});
-//     if (response.status === 200) {
-//       // THe following data => data returns the json converted data.
-//       return response.json().then(data => data);
-//     }
-//     else if (response.status === 401) {
-//       return null;
-//     }
-//     else {
-//       throw new Error();
-//     }
-//   }
+
+  async getUser(emailAddress, password) {
+    const response = await this.api(`/users`, 'GET', null, true, {emailAddress, password});
+    if (response.status === 200) {
+      return response.json().then(data => data);
+    }
+    else if (response.status === 401) {
+      return response.json().then(data => {
+        return data.errors;
+      });
+    }
+    else {
+      throw new Error();
+    }
+  }
   
 //   async createUser(user) {
 //     const response = await this.api('/users', 'POST', user);

@@ -27,7 +27,7 @@ const authenticateUser = async (req, res, next) => {
       message = `User not found with email address: ${credentials.name}`;
     }
   } else {
-    message = `Authorization header not found`;
+    message = `Authorization header not found. You are not authorized to create a course.`;
   }
 
   if (message) {

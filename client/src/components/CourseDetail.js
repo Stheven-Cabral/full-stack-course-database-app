@@ -15,6 +15,7 @@ export default class CourseDetail extends Component {
     context.data.getCourseDetails(courseId)
     .then(response => {
       let materials = response.course.materialsNeeded;
+      // console.log(response);
 
       if(materials !== null) {
         materials = materials.split('\n');
