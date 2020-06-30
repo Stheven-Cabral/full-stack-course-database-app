@@ -18,6 +18,7 @@ import Forbidden from './components/Forbidden';
 import NotFound from './components/NotFound';
 import UpdateCourse from './components/UpdateCourse';
 import DeleteCourse from './components/DeleteCourse';
+import ProtectedRoute from './ProtectedRoute';
 
 const HeaderWithContext = withContext(Header);
 const CoursesWithContext = withContext(Courses);
@@ -40,7 +41,7 @@ export default () => (
           <Route path="/signup" component={UserSignUpWithContext} />
           <Route path="/signout" component={UserSignOutWithContext} />
           <Route path="/course-detail/:courseId" component={CourseDetailWithContext} />
-          <Route path="/create-course" component={CreateCourseWithContext} />
+          <ProtectedRoute path="/create-course" component={CreateCourseWithContext} />
           <Route path="/update-course" component={UpdateCourseWithContext} />
           <Route path="/delete/:courseId" component={DeleteCourseWithContext} />
           <Route path="/error" component={ErrorPage} />
