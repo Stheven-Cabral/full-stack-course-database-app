@@ -86,6 +86,8 @@ export default class CreateCourse extends Component {
   create = (e) => {
     e.preventDefault();
     const { context } = this.props;
+    const { emailAddress } = context.authenticatedUser;
+    const { password } = context.authenticatedUser;
 
     const {
       title,
@@ -102,7 +104,7 @@ export default class CreateCourse extends Component {
       materialsNeeded,
     }
 
-    context.data.createCourse(course)
+    context.data.createCourse(course, emailAddress, password)
     .then(errors => {
       let errorList = [];
       console.log(errors);

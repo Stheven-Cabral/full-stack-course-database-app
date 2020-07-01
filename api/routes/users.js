@@ -23,7 +23,7 @@ function asyncHandler (cb) {
 router.get('/users', authenticateUser, asyncHandler( async (req, res) => {
   const user = await User.findByPk(req.currentUser.id, {
     attributes: {
-      exclude: ['password', 'createdAt', 'updatedAt']
+      exclude: ['createdAt', 'updatedAt']
     }
   });
 

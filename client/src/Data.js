@@ -51,8 +51,8 @@ export default class Data {
     }
   }
 
-  async createCourse(course) {
-    const response = await this.api(`/courses`, 'POST', course);
+  async createCourse(course, emailAddress, password) {
+    const response = await this.api(`/courses`, 'POST', course, true, {emailAddress, password});
     if (response.status === 201) {
       return [];
     }
@@ -81,7 +81,7 @@ export default class Data {
       throw new Error ()
     }
   }
-
+  // Error might be here when retrieving user
   async getUser(emailAddress, password) {
     const response = await this.api(`/users`, 'GET', null, true, {emailAddress, password});
     if (response.status === 200) {

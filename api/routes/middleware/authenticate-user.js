@@ -13,10 +13,13 @@ const authenticateUser = async (req, res, next) => {
   const credentials = auth(req);
 
   if (credentials) {
-    const user = users.find(u => u.emailAddress === credentials.name);
+    const userData = users.find(u => u.emailAddress === credentials.name);
+    const user = userData.dataValues;
+    console.log(user);
+    console.log(credentials);
 
     if (user) {
-      const authenticated = bcryptjs.compareSync(credentials.pass, user.password);
+      const authenticated = bcryptjs.compare(credentials.pass, user.password);
 
       if (authenticated) {
         req.currentUser = user;
