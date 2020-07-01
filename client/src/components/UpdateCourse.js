@@ -101,6 +101,25 @@ export default class UpdateCourse extends Component {
 
   update = (e) => {
     e.preventDefault();
+    const { context } = this.props;
+    const { emailAddress } = context.authenticatedUser;
+    const { passwrod } = context.authenticatedUser;
+
+    const {
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded
+    } = this.state;
+
+    const updatedCourse = {
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded
+    }
+
+    
   }
 
   cancel = (e) => {

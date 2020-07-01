@@ -66,6 +66,21 @@ export default class Data {
     }
   }
 
+  async updateCourse(course, emailAddress, password) {
+    const response = await this.api(`/courses`, 'PUT', course, true, {emailAddress, password});
+    if (response.status === 201) {
+      return [];
+    }
+    else if (response.status === 400 || response.status === 401) {
+      return response.json().then(data => {
+        return data;
+      });
+    }
+    else {
+      throw new Error ('Error: Something Went Wrong')
+    }
+  }
+
   async deleteCourse(courseId) {
     // Should be authenticated. Fix later
     const response = await this.api(`/courses/${courseId}`, 'DELETE', null, false, null);
