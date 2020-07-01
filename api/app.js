@@ -65,7 +65,7 @@ app.use(async (err, req, res, next) => {
     const errors = await err.errors.map(e => e.message);
     res.status(err.status).json({
       message: "Something went wrong",
-      error: errors
+      errors: errors
     });
   } else {
     res.status(err.status || 500).json({

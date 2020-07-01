@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 export default class UpdateCourse extends Component {
   state = {
+    courseId: '',
     title: '',
     firstName: '',
     lastName: '',
@@ -19,6 +20,7 @@ export default class UpdateCourse extends Component {
       console.log(response);
       const user = response.course.User;
       this.setState({
+        courseId: id,
         title: response.course.title,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -37,14 +39,28 @@ export default class UpdateCourse extends Component {
       description,
       estimatedTime,
       materialsNeeded,
-      // errors
+      errors
      } = this.state;
 
     return (
       <div className="bounds course--detail">
         <h1>Update Course</h1>
         <div>
-          <form>
+          {errors.length ? 
+            <React.Fragment>
+              <h2 className="validation--errors--label">Validation errors</h2>
+              <div className="validation-errors">
+                <ul>
+                  {errors.map((err, index) =>
+                    <li key={index}>{err}</li>
+                  )}
+                </ul> 
+              </div>
+            </React.Fragment>
+            : 
+            <hr />
+          }
+          <form onSubmit={this.update}>
             <div className="grid-66">
               <div className="course--header">
                 <h4 className="course--label">Course</h4>
@@ -103,9 +119,10 @@ export default class UpdateCourse extends Component {
     e.preventDefault();
     const { context } = this.props;
     const { emailAddress } = context.authenticatedUser;
-    const { passwrod } = context.authenticatedUser;
+    const { password } = context.authenticatedUser;
 
     const {
+      courseId,
       title,
       description,
       estimatedTime,
@@ -119,12 +136,25 @@ export default class UpdateCourse extends Component {
       materialsNeeded
     }
 
-    
+    context.data.updateCourse(courseId, updatedCourse, emailAddress, password)
+    .then(errors => {
+      console.log(errors);
+      if (errors.errors) {
+        this.setState({ errors: errors.errors});
+      } else if (errors.message) {
+        let errorList = [];
+        errorList.push(errors.message);
+        this.setState({ errors: errors.message});
+      } else {
+        const id = this.state.courseId;
+        this.props.history.push(`/courses/${id}`);
+      }
+    })
   }
 
   cancel = (e) => {
     e.preventDefault();
-    const{ id } = this.props.match.params;
+    const id = this.state.courseId;
     this.props.history.push(`/courses/${id}`);
   }
 }
