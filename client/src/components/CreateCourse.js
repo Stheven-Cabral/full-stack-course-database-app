@@ -66,7 +66,7 @@ export default class CreateCourse extends Component {
                   
                   <li className="course--stats--list--item">
                     <h4>Materials Needed</h4>
-                    <div><textarea onChange={this.change} id="materialsNeeded" name="materialsNeeded" className="" placeholder="List materials..." value={materialsNeeded}></textarea></div>
+                    <div><textarea onChange={this.change} id="materialsNeeded" name="materialsNeeded" className="" placeholder="Please list each material..." value={materialsNeeded}></textarea></div>
                   </li>
                 </ul>
               </div>

@@ -89,7 +89,7 @@ export default class UpdateCourse extends Component {
                   <li className="course--stats--list--item">
                     <h4>Materials Needed</h4>
                     <div>
-                      <textarea onChange={this.change} id="materialsNeeded" name="materialsNeeded" className="" placeholder="List each material starting with a * symbol..." value={materialsNeeded}></textarea></div>
+                      <textarea onChange={this.change} id="materialsNeeded" name="materialsNeeded" className="" placeholder="Please list each material..." value={materialsNeeded}></textarea></div>
                   </li>
                 </ul>
               </div>
@@ -138,7 +138,6 @@ export default class UpdateCourse extends Component {
 
     context.data.updateCourse(courseId, updatedCourse, emailAddress, password)
     .then(errors => {
-      console.log(errors);
       if (errors.errors) {
         this.setState({ errors: errors.errors});
       } else if (errors.message) {
