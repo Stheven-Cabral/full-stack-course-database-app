@@ -11,7 +11,9 @@ export default class DeleteCourse extends Component {
     context.data.getCourseDetails(id)
     .then(response => {
       this.setState({
-        course: response.course
+        course: response.course,
+        emailAddress: context.authenticatedUser.emailAddress,
+        password: context.authenticatedUser.password
       })
     });
   }
@@ -31,9 +33,11 @@ export default class DeleteCourse extends Component {
 
   confirmDelete = () => {
     const { context }= this.props;
-    const { course } = this.state;
-    context.data.deleteCourse(course.id);
-    this.props.history.push('/');
+    const { course, emailAddress, password } = this.state;
+    context.data.deleteCourse(course.id, emailAddress, password)
+    .then(() => {
+      this.props.history.push('/')
+    });
   }
 
   rejectDelete = () => {
