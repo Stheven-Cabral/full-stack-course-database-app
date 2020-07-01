@@ -7,8 +7,8 @@ export default class DeleteCourse extends Component {
 
   componentDidMount() {
     const { context }= this.props;
-    const { courseId }= this.props.match.params;
-    context.data.getCourseDetails(courseId)
+    const { id } = this.props.match.params;
+    context.data.getCourseDetails(id)
     .then(response => {
       this.setState({
         course: response.course
@@ -17,9 +17,7 @@ export default class DeleteCourse extends Component {
   }
 
   render() {
-    const {
-      course
-    } = this.state;
+    const { course } = this.state;
 
     return (
       <React.Fragment>
@@ -40,6 +38,6 @@ export default class DeleteCourse extends Component {
 
   rejectDelete = () => {
     const { course } = this.state;
-    this.props.history.push(`/course-detail/${course.id}`);
+    this.props.history.push(`/courses/${course.id}`);
   }
 }

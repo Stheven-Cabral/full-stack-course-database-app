@@ -10,9 +10,9 @@ export default class CourseDetail extends Component {
 
   componentDidMount() {
     const { context } = this.props;
-    const { courseId } = this.props.match.params;
+    const { id } = this.props.match.params;
     
-    context.data.getCourseDetails(courseId)
+    context.data.getCourseDetails(id)
     .then(response => {
       let materials = response.course.materialsNeeded;
       // console.log(response);
@@ -44,8 +44,8 @@ export default class CourseDetail extends Component {
           <div className="bounds">
             <div className="grid-100">
               <span>
-                <Link className="button" to="/update-course">Update Course</Link>
-                <Link className="button" to={`/delete/${courseDetails.id}`}>Delete Course</Link>
+                <Link className="button" to={`/courses/${courseDetails.id}/update`}>Update Course</Link>
+                <Link className="button" to={`/courses/delete/${courseDetails.id}`}>Delete Course</Link>
               </span>
               <Link className="button button-secondary" to="/">Return to List</Link>
             </div>

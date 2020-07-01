@@ -37,13 +37,13 @@ export default () => (
 
         <Switch>
           <Route exact path="/" component={CoursesWithContext} />
+          <ProtectedRoute path="/courses/create" component={CreateCourseWithContext} />
+          <ProtectedRoute path="/courses/:id/update" component={UpdateCourseWithContext} />
+          <ProtectedRoute path="/courses/delete/:id" component={DeleteCourseWithContext} />
+          <Route path="/courses/:id" component={CourseDetailWithContext} />
           <Route path="/signin" component={UserSignInWithContext} />
           <Route path="/signup" component={UserSignUpWithContext} />
           <Route path="/signout" component={UserSignOutWithContext} />
-          <Route path="/course-detail/:courseId" component={CourseDetailWithContext} />
-          <ProtectedRoute path="/create-course" component={CreateCourseWithContext} />
-          <Route path="/update-course" component={UpdateCourseWithContext} />
-          <Route path="/delete/:courseId" component={DeleteCourseWithContext} />
           <Route path="/error" component={ErrorPage} />
           <Route path="/forbidden" component={Forbidden} />
           <Route path="/notfound" component={NotFound} />

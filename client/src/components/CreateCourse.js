@@ -20,7 +20,6 @@ export default class CreateCourse extends Component {
     } = this.state;
 
     return (
-      // Requires a custom header. View html.
       <div className="bounds course--detail">
         <h1>Create Course</h1>
         <div>
@@ -124,9 +123,9 @@ export default class CreateCourse extends Component {
   }
 
   // `change` method - allows value of input or text area to be displayed as user types as well as sets state.
-  change = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
+  change = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
 
     this.setState(() => {
       return {
