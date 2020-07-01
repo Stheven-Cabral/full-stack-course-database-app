@@ -81,9 +81,9 @@ export default class Data {
     }
   }
 
-  async deleteCourse(courseId) {
+  async deleteCourse(courseId, emailAddress, password) {
     // Should be authenticated. Fix later
-    const response = await this.api(`/courses/${courseId}`, 'DELETE', null, false, null);
+    const response = await this.api(`/courses/${courseId}`, 'DELETE', null, true, {emailAddress, password});
     if (response.status === 204) {
       return []
     }
