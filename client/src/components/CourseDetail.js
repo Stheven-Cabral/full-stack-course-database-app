@@ -8,6 +8,11 @@ export default class CourseDetail extends Component {
     materials: [],
   };
 
+  /***
+   * At component mount the getCourseDetails() method is called from context.
+   * state properties are set using the data returned from getCourseDetails().
+   * Errors are caught and logged using catch(). The user is routed to the NotFound component.
+   */
   componentDidMount() {
     const { context } = this.props;
     const { id } = this.props.match.params;
@@ -52,7 +57,7 @@ export default class CourseDetail extends Component {
           <div className="bounds">
             <div className="grid-100">
               <span>
-                {authenticatedUser ?
+                {authenticatedUser.emailAddress === user.emailAddress ?
                   <React.Fragment>
                     <Link className="button" to={`/courses/${courseDetails.id}/update`}>Update Course</Link>
                     <Link className="button" to={`/courses/delete/${courseDetails.id}`}>Delete Course</Link>
