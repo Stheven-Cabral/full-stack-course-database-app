@@ -24,7 +24,6 @@ export default class DeleteCourse extends Component {
 
   render() {
     const { course } = this.state;
-
     return (
       <React.Fragment>
         <h2>&nbsp;&nbsp;&nbsp;Are you sure you want to delete the course: {course.title}?
