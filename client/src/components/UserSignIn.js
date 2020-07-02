@@ -61,7 +61,7 @@ export default class UserSignIn extends Component {
   submit = (e) => {
     e.preventDefault();
     const { context } = this.props;
-    const { from } = this.props.location.state || { from: { pathname: '/' } }; //this.props.location.state is set in ProtectedRoute.js
+    const { from } = this.props.location.state || { from: { pathname: '/' } }; //this.props.location.state is set in PrivateRoute.js
     const { emailAddress, password } = this.state;
 
     context.actions.signIn(emailAddress, password)

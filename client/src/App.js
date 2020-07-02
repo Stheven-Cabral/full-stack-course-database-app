@@ -18,7 +18,7 @@ import Forbidden from './components/Forbidden';
 import NotFound from './components/NotFound';
 import UpdateCourse from './components/UpdateCourse';
 import DeleteCourse from './components/DeleteCourse';
-import ProtectedRoute from './ProtectedRoute';
+import PrivateRoute from './PrivateRoute';
 
 const HeaderWithContext = withContext(Header);
 const CoursesWithContext = withContext(Courses);
@@ -37,9 +37,9 @@ export default () => (
 
         <Switch>
           <Route exact path="/" component={CoursesWithContext} />
-          <ProtectedRoute path="/courses/create" component={CreateCourseWithContext} />
-          <ProtectedRoute path="/courses/:id/update" component={UpdateCourseWithContext} />
-          <ProtectedRoute path="/courses/delete/:id" component={DeleteCourseWithContext} />
+          <PrivateRoute path="/courses/create" component={CreateCourseWithContext} />
+          <PrivateRoute path="/courses/:id/update" component={UpdateCourseWithContext} />
+          <PrivateRoute path="/courses/delete/:id" component={DeleteCourseWithContext} />
           <Route path="/courses/:id" component={CourseDetailWithContext} />
           <Route path="/signin" component={UserSignInWithContext} />
           <Route path="/signup" component={UserSignUpWithContext} />
