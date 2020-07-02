@@ -17,3 +17,15 @@ After all dependancies have installed, start the REST API by entering the follow
 
 ### `npm start`
 
+The REST API will be hosted on http://localhost:5000/
+
+
+## Run the client
+
+In your preferred terminal, navigate to the 'client' folder and then enter:
+### `npm install`
+
+After all dependancies have installed, start the client by entering the following in your terminal:
+### `npm start`
+
+The application client will be hosted on http://localhost:3000/
