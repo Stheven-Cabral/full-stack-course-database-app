@@ -35,6 +35,10 @@ export default class UpdateCourse extends Component {
       } else {
         this.props.history.push('/notfound');
       }
+
+      if (this.state.courseByEmailAddress !== this.state.authenticatedUserEmailAddress) {
+        this.props.history.push(`/forbidden`);
+      }
     })
     .catch(err => {
       console.log(err);
@@ -52,7 +56,7 @@ export default class UpdateCourse extends Component {
       materialsNeeded,
       errors,
      } = this.state;
-
+    
     return (
       <div className="bounds course--detail">
         <h1>Update Course</h1>
@@ -138,8 +142,6 @@ export default class UpdateCourse extends Component {
       description,
       estimatedTime,
       materialsNeeded,
-      courseByEmailAddress,
-      authenticatedUserEmailAddress
     } = this.state;
 
     const updatedCourse = {
@@ -151,9 +153,7 @@ export default class UpdateCourse extends Component {
 
     context.data.updateCourse(courseId, updatedCourse, emailAddress, password)
     .then(errors => {
-      if (courseByEmailAddress !== authenticatedUserEmailAddress) {
-        this.props.history.push(`/forbidden`);
-      } else if (errors.errors) {
+      if (errors.errors) {
         this.setState({ errors: errors.errors});
       } else {
         const id = this.state.courseId;
