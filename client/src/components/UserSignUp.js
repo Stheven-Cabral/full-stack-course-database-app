@@ -57,6 +57,9 @@ export default class UserSignUp extends Component {
     )
   }
 
+    /***
+   * `change` function links an input's or textarea's element name to a state property and assigns it the value of the input or textarea element.
+   */
   change = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -68,6 +71,14 @@ export default class UserSignUp extends Component {
     });
   }
 
+  /***
+   * `submit` function prevents default actions when user clicks the Sign Up button.
+   * If the `password` and `confirmPassword` do not match, an error is assigned to the `errors` state property indicated the two passwords don't match.
+   * Else, the `createUser` method called with the `user` payload as an argument.
+   * If `createUser` returns errors, the errors are assigned to the errors state property to be rendered as validation errors.
+   * If `createUser` does not return any errors, the `signIn` function is called with the `emailAddress` and `password` state properties and the user is redirected to the `/` endpoint.
+   * Any other errors are caught by catch(), logged to the console and the user is redirected to the `/error` endpoint.
+   */
   submit = (e) => {
     e.preventDefault();
     const { context } = this.props;
@@ -103,7 +114,6 @@ export default class UserSignUp extends Component {
           this.props.history.push('/');
         }
       })
-      // handle rejected promises
       .catch(err => {
         console.log(err);
         this.props.history.push('/error');
@@ -111,6 +121,10 @@ export default class UserSignUp extends Component {
     }
   }
 
+  /***
+   * `cancel` function prevents default on Cancel button click.
+   * The user is redirected to the endpoint `/` which displays the courses list.
+   */
   cancel = (e) => {
     e.preventDefault();
     this.props.history.push('/');

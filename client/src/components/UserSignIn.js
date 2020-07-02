@@ -47,6 +47,9 @@ export default class UserSignIn extends Component {
     )
   }
 
+  /***
+   * `change` function links an input's or textarea's element name to a state property and assigns it the value of the input or textarea element.
+   */
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -58,6 +61,13 @@ export default class UserSignIn extends Component {
     });
   }
 
+  /***
+   * `submit` function prevents default actions when user clicks the Sign In button.
+   * The `signIn` function from context is called using `emailAddress` and `password` from state properties as arguments.
+   * If the `signIn` function response has a status of 200, the user is redirected to the previous page or the `/` endpoint and the a success message is logged to the console.
+   * If the `signIn` function response has a status of 401, the errors returned by `signIn` is assigned to the errors state property to be rendered as validation errors.
+   * Any other errors are caught by catch(), logged to the console and the user is redirected to the `/error` endpoint.
+   */
   submit = (e) => {
     e.preventDefault();
     const { context } = this.props;
@@ -81,6 +91,10 @@ export default class UserSignIn extends Component {
       })
   }
 
+  /***
+   * `cancel` function prevents default on Cancel button click.
+   * The user is redirected to the endpoint `/` which displays the courses list.
+   */
   cancel = (e) => {
     e.preventDefault();
     this.props.history.push('/');

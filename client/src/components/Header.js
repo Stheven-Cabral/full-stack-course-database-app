@@ -9,6 +9,8 @@ export default ({context}) => {
         <div className="bounds">
           <Link className="header--logo" to='/'>Courses</Link>
           <nav>
+            {/* If the the authenticatedUser from context is not null, the Header is changed to welcome the user and display the sign out button.
+            If the authenticatedUser is null, the sign up and sign in buttons are rendered. */}
             {context.authenticatedUser ?
               <React.Fragment>
                 <span>Welcome, {context.authenticatedUser.firstName}!</span>

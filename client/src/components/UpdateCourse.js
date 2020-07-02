@@ -12,6 +12,12 @@ export default class UpdateCourse extends Component {
     errors:[]
   }
 
+  /***
+   * At component mount the `getCourseDetails()` method is called from context with argument `id` from this.props.match.params.
+   * state properties are set using the data returned from `getCourseDetails()`.
+   * If the state properties `courseByEmailAddress` and `authenticatedUserEmailAddress`, the user is redirected to the `/forbidden` endpoint.
+   * Errors are caught and logged using `catch()` and the user is routed to the `/error` endpoint.
+   */
   componentDidMount() {
     const{ context } = this.props;
     const{ authenticatedUser } = context;
@@ -119,6 +125,10 @@ export default class UpdateCourse extends Component {
     )
   }
 
+  /***
+   * `change` function links an input's or textarea's element name to a state property and assigns it the value of the input or textarea element.
+   * If no value is assigned due to the user being redirected to the `/forbidden` endpoint, the [name] properties will be assigned an empty string to prevent any errors.
+   */
   change = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -130,6 +140,13 @@ export default class UpdateCourse extends Component {
     });
   }
 
+  /***
+   * `update` function prevents default actions when user clicks the Update Course button.
+   * The `updateCourse` from context is called using `courseId`, `updatedCourse`, `emailAddress`, and `password` from state properties as arguments.
+   * If errors are returned by `updateCourse`, the errors are assigned to the `errors` state proerty to rendered as validation errors.
+   * If not errors are returned from `updateCourse`, the user is redirected to the the course's detail page.
+   * Any other errors are caught by catch(), logged to the console and the user is redirected to the `/error` endpoint.
+   */
   update = (e) => {
     e.preventDefault();
     const { context } = this.props;
@@ -166,6 +183,11 @@ export default class UpdateCourse extends Component {
     })
   }
 
+  /***
+   * `cancel` function prevents default on Cancel button click.
+   * A variable `id` is assigned to the state property courseId.
+   * The user is redirected to the course's detail page.
+   */
   cancel = (e) => {
     e.preventDefault();
     const id = this.state.courseId;

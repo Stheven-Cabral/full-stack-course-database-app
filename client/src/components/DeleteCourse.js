@@ -47,7 +47,7 @@ export default class DeleteCourse extends Component {
    * `confirmDelete` function prevents default actions when user clicks YES to delete a course.
    * The `deleteCourse` from context is called using `course.id`, `emailAddress`, and `password` from state as arguments.
    * If errors are returned, they are logged to the console and the user is redirected to the `/forbidden` endpoint; else, the user is redirected to the `/` endpoint.
-   * errors are caught by catch(), logged to the console and the user is redirected to the `/error` endpoint.
+   * Any other errors are caught by catch(), logged to the console and the user is redirected to the `/error` endpoint.
    */
   confirmDelete = (e) => {
     e.preventDefault();
