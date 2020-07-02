@@ -1,16 +1,19 @@
 # full-stack-course-database-app
+
  Tenth Full Stack JavaScript Tech Degree Project
 
- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full stack application that provides a way for users to administer a school database containing information about courses. Users can interact with the database by retrieving a list of courses, viewing detail for a specific course, as well as creating, updating and deleting courses in the database.
 
-## Available Scripts
+The client was created using react and create-react-app and the REST API was build using Express and Sequelize.
 
-In the project directory, you can run:
+# Instructions for Running the Application
+
+## Run the REST API for the Database
+
+In your preferred terminal, navigate to the 'api' folder and then enter:
+### `npm install`
+
+After all dependancies have installed, start the REST API by entering the following in your terminal:
 
 ### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
