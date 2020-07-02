@@ -67,7 +67,6 @@ export default class UserSignIn extends Component {
     context.actions.signIn(emailAddress, password)
       .then( user => {
         if (user.status === 200) {
-          console.log(this.props);
           this.props.history.push(from);
           console.log(`SUCCESS! ${emailAddress} is now signed in!`);
         } else if (user.status === 401) {

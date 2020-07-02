@@ -125,7 +125,7 @@ export default class UpdateCourse extends Component {
 
     this.setState(() => {
       return {
-        [name]: value
+        [name]: value || ''
       }
     });
   }
