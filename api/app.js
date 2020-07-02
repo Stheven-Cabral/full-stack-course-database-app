@@ -69,7 +69,8 @@ app.use(async (err, req, res, next) => {
     });
   } else {
     res.status(err.status || 500).json({
-      message: err.message
+      message: "Something went wrong",
+      errors: err.message
     });
   }
 });

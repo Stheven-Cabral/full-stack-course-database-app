@@ -28,13 +28,14 @@ export default class Data {
   async getCourses() {
     const response = await this.api(`/courses`, 'GET', null, false, null);
     if (response.status === 200) {
+      // json is missing a parenthesis
       return response.json().then(data => data);
     }
     else if (response.status === 400) {
       return null;
     }
     else {
-      throw new Error ()
+      throw new Error();
     }
   }
 
@@ -44,6 +45,8 @@ export default class Data {
       return response.json().then(data => data);
     }
     else if (response.status === 404) {
+      console.log(response.status);
+      console.log(response.statusText);
       return null;
     }
     else {

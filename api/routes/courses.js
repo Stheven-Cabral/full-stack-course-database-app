@@ -12,7 +12,7 @@ function asyncHandler (cb) {
     try {
       await cb(req,res,next);
     } catch(err) {
-      res.send(err);
+      next(err);
     }
   }
 }
@@ -39,7 +39,9 @@ router.get('/courses/:id', asyncHandler(async (req, res) => {
   if (course) {
     res.status(200).json({ course: course });
   } else {
-    res.status(404).json({message: "Course not found"});
+    res.status(404).json({
+      message: "Something Went Wrong.",
+      errors: "Course Not Found"});
   }
 }));
 
