@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import { Link } from 'react-router-dom';
 
 export default class CreateCourse extends Component {
   state = {
@@ -82,6 +81,11 @@ export default class CreateCourse extends Component {
     )
   }
 
+  /***
+   * `create` function prevents default actions on submit and calls the createCourse() method from context with the course payload, and authenticated user email address and password.
+   * If getCourse() returns errors, they are set to the `errors` state property to be rendered as validation errors to the user.
+   * If getCourse() returns no errors, the user is directed to the `/` endpoint with the new course added to the courses list.
+   */
   create = (e) => {
     e.preventDefault();
     const { context } = this.props;
@@ -107,10 +111,6 @@ export default class CreateCourse extends Component {
     .then(errors => {
       if (errors.errors) {
         this.setState({ errors: errors.errors});
-      } else if (errors.message) {
-        let errorList = [];
-        errorList.push(errors.message);
-        this.setState({ errors: errors.message});
       } else {
         this.props.history.push('/');
       }
@@ -121,7 +121,9 @@ export default class CreateCourse extends Component {
     })
   }
 
-  
+  /***
+   * `change` function links an input's or textarea's element name to a state property and assigns it the value of the input or textarea element.
+   */
   change = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -133,6 +135,10 @@ export default class CreateCourse extends Component {
     });
   }
 
+  /***
+   * `cancel` function prevents event default actions on button click.
+   * The user is redirected to the `/` endpoint which displays the courses list.
+   */
   cancel = (e) => {
     e.preventDefault();
     this.props.history.push('/');

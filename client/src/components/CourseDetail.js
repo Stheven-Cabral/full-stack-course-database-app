@@ -11,7 +11,7 @@ export default class CourseDetail extends Component {
   /***
    * At component mount the getCourseDetails() method is called from context.
    * state properties are set using the data returned from getCourseDetails().
-   * Errors are caught and logged using catch(). The user is routed to the NotFound component.
+   * Errors are caught and logged using catch() and the user is routed to the `/error` endpoint.
    */
   componentDidMount() {
     const { context } = this.props;
@@ -57,6 +57,8 @@ export default class CourseDetail extends Component {
           <div className="bounds">
             <div className="grid-100">
               <span>
+                {/* The following ternary operators render `Update Course` and `Delete Course` buttons when the logged in authenticated user matches
+                the user that created the course. */}
                 {authenticatedUser ?
                   authenticatedUser.emailAddress === user.emailAddress ?
                     <React.Fragment>

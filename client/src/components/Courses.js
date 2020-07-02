@@ -7,6 +7,11 @@ export default class Courses extends Component {
     courses: []
   };
 
+   /***
+   * At component mount the getCourses() method is called from context.
+   * state properties `courses` are set using the data returned from getCourses().
+   * Errors are caught and logged using catch() and the user is routed to the `/error` endpoint.
+   */
   componentDidMount() {
     const { context } = this.props;
     context.data.getCourses()

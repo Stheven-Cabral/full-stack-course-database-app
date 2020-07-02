@@ -5,6 +5,11 @@ export default class DeleteCourse extends Component {
     course: {}
   }
 
+  /***
+   * At component mount the getCourseDetails() method is called from context with argument `id` from this.props.match.params.
+   * state properties are set using the data returned from getCourseDetails().
+   * Errors are caught and logged using catch() and the user is routed to the `/error` endpoint.
+   */
   componentDidMount() {
     const { context }= this.props;
     const { id } = this.props.match.params;
@@ -38,6 +43,12 @@ export default class DeleteCourse extends Component {
     )
   }
 
+  /***
+   * `confirmDelete` function prevents default actions when user clicks YES to delete a course.
+   * The `deleteCourse` from context is called using `course.id`, `emailAddress`, and `password` from state as arguments.
+   * If errors are returned, they are logged to the console and the user is redirected to the `/forbidden` endpoint; else, the user is redirected to the `/` endpoint.
+   * errors are caught by catch(), logged to the console and the user is redirected to the `/error` endpoint.
+   */
   confirmDelete = (e) => {
     e.preventDefault();
     const { context }= this.props;
@@ -57,6 +68,9 @@ export default class DeleteCourse extends Component {
     });
   }
 
+  /***
+   * `rejectDelete` function returns the user to the course's detail page.
+   */
   rejectDelete = () => {
     const { course } = this.state;
     this.props.history.push(`/courses/${course.id}`);
