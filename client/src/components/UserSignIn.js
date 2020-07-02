@@ -61,12 +61,13 @@ export default class UserSignIn extends Component {
   submit = (e) => {
     e.preventDefault();
     const { context } = this.props;
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    const { from } = this.props.location.state || { from: { pathname: '/' } }; //this.props.location.state is set in ProtectedRoute.js
     const { emailAddress, password } = this.state;
 
     context.actions.signIn(emailAddress, password)
       .then( user => {
         if (user.status === 200) {
+          console.log(this.props);
           this.props.history.push(from);
           console.log(`SUCCESS! ${emailAddress} is now signed in!`);
         } else if (user.status === 401) {
