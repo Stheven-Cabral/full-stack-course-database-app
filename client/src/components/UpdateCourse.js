@@ -36,6 +36,10 @@ export default class UpdateCourse extends Component {
         this.props.history.push('/notfound');
       }
     })
+    .catch(err => {
+      console.log(err);
+      this.props.history.push('/error');
+    })
   }
 
   render() {
@@ -159,6 +163,10 @@ export default class UpdateCourse extends Component {
         const id = this.state.courseId;
         this.props.history.push(`/courses/${id}`);
       }
+    })
+    .catch(err => {
+      console.log(err);
+      this.props.history.push('/error');
     })
   }
 

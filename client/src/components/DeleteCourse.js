@@ -19,6 +19,10 @@ export default class DeleteCourse extends Component {
       } else {
         this.props.history.push('/notfound');
       }
+    })
+    .catch(err => {
+      console.log(err);
+      this.props.history.push('/error');
     });
   }
 
@@ -45,6 +49,10 @@ export default class DeleteCourse extends Component {
       } else {
         this.props.history.push('/');
       }
+    })
+    .catch(err => {
+      console.log(err);
+      this.props.history.push('/error');
     });
   }
 
