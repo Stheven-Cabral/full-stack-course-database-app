@@ -6,6 +6,7 @@ const Context = React.createContext();
 
 export class Provider extends Component {
   state = {
+    // The `authenticatedUser` state property is assigned null or to the cookie named authenticatedUser.
     authenticatedUser: Cookies.getJSON('authenticatedUser') || null
   }
 
@@ -33,6 +34,12 @@ export class Provider extends Component {
     )
   }
 
+  /***
+   * `signIn` method - takes the parameter emailAddress and password.
+   * `getUser` function from state is called on the emailAddress and password parameters.
+   * If `getUser` returns a response status of 200, the `user` from response is assigned to the authenticatedUser state property and the authenticatedUser cookie.
+   * `signIn` returns the `user` from response.
+   */
   signIn = async (emailAddress, password) => {
     const user = await this.data.getUser(emailAddress, password);
     if (user.status === 200) {
@@ -46,6 +53,10 @@ export class Provider extends Component {
     return user;
   }
 
+  /***
+   * `signOut` method - sets the `authenticatedUser` state proeprty to null.
+   * The `authenticatedUser` cookie is removed.
+   */
   signOut = () => {
     this.setState({ authenticatedUser: null });
     Cookies.remove('authenticatedUser');
