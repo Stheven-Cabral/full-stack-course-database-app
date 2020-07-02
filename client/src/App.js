@@ -20,6 +20,9 @@ import UpdateCourse from './components/UpdateCourse';
 import DeleteCourse from './components/DeleteCourse';
 import PrivateRoute from './PrivateRoute';
 
+/***
+ * Components  given context using the `withContext` higher order component.
+ */
 const HeaderWithContext = withContext(Header);
 const CoursesWithContext = withContext(Courses);
 const UserSignInWithContext = withContext(UserSignIn);
@@ -30,6 +33,9 @@ const CreateCourseWithContext = withContext(CreateCourse);
 const UpdateCourseWithContext = withContext(UpdateCourse);
 const DeleteCourseWithContext = withContext(DeleteCourse);
 
+/***
+ * Setup application routes.
+ */
 export default () => (
     <Router>
       <div>
