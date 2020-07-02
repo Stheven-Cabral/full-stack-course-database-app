@@ -31,7 +31,9 @@ export default class Data {
       // json is missing a parenthesis
       return response.json().then(data => data);
     }
-    else if (response.status === 400) {
+    else if (response.status === 404) {
+      console.log(response);
+      // console.log(response.statusText);
       return null;
     }
     else {
@@ -59,7 +61,7 @@ export default class Data {
     if (response.status === 201) {
       return [];
     }
-    else if (response.status === 400 || response.status === 401) {
+    else if (response.status === 400) {
       return response.json().then(data => {
         return data;
       });
@@ -74,7 +76,7 @@ export default class Data {
     if (response.status === 204) {
       return [];
     }
-    else if (response.status === 400 || response.status === 403) {
+    else if (response.status === 400 || response.status === 401 || response.status === 403) {
       return response.json().then(data => {
         return data;
       });
@@ -84,10 +86,10 @@ export default class Data {
     }
   }
 
+
   async deleteCourse(courseId, emailAddress, password) {
-    // Should be authenticated. Fix later
     const response = await this.api(`/courses/${courseId}`, 'DELETE', null, true, {emailAddress, password});
-    if (response.status === 204) {
+    if (response.status === 200) {
       return []
     }
     else if (response.status === 403) {
@@ -99,20 +101,29 @@ export default class Data {
       throw new Error ()
     }
   }
-  // Error might be here when retrieving user
+  
+
   async getUser(emailAddress, password) {
     const response = await this.api(`/users`, 'GET', null, true, {emailAddress, password});
     if (response.status === 200) {
-      return response.json().then(data => data);
+      return response.json().then(data => { 
+        data.status = 200;
+        return data; 
+      });
     }
     else if (response.status === 401) {
-      return null;
+      return response.json().then(data => {
+        data.status = 401;
+        console.log(data)
+        return data;
+      });
     }
     else {
       throw new Error();
     }
   }
   
+
   async createUser(user) {
     const response = await this.api('/users', 'POST', user);
     if (response.status === 201) {

@@ -64,7 +64,10 @@ router.post('/users', asyncHandler(async (req, res, next) => {
       res.status(201).location('/').end();
 
     } else {
-      res.status(405).json({ message: `The email address ${newUser.emailAddress} already exists.` });
+      res.status(405).json({ 
+        message: `Something Went Wrong`,
+        errors: [`The email address ${newUser.emailAddress} already exists.`]
+     });
     }
 
   } catch (err) {

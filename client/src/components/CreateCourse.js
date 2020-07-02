@@ -105,7 +105,6 @@ export default class CreateCourse extends Component {
 
     context.data.createCourse(course, emailAddress, password)
     .then(errors => {
-      console.log(errors);
       if (errors.errors) {
         this.setState({ errors: errors.errors});
       } else if (errors.message) {
@@ -122,7 +121,7 @@ export default class CreateCourse extends Component {
     })
   }
 
-  // `change` method - allows value of input or text area to be displayed as user types as well as sets state.
+  
   change = (e) => {
     const name = e.target.name;
     const value = e.target.value;

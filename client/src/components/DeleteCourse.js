@@ -45,6 +45,7 @@ export default class DeleteCourse extends Component {
     context.data.deleteCourse(course.id, emailAddress, password)
     .then((errors) => {
       if (errors.length) {
+        console.log(errors);
         this.props.history.push('/forbidden');
       } else {
         this.props.history.push('/');

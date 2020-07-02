@@ -96,10 +96,8 @@ export default class UserSignUp extends Component {
     } else {
       context.data.createUser(user)
       .then(errors => {
-        console.log(errors);
-
         if (errors.length) {
-          this.setState({ errors: errors});
+          this.setState({ errors: errors });
         } else {
           context.actions.signIn(emailAddress, password)
           this.props.history.push('/');

@@ -14,11 +14,10 @@ const authenticateUser = async (req, res, next) => {
 
   if (credentials) {
     const userData = users.find(u => u.emailAddress === credentials.name);
-    const user = userData.dataValues;
-    console.log(user);
-    console.log(credentials);
+    console.log(userData)
 
-    if (user) {
+    if (userData) {
+      const user = userData.dataValues;
       const authenticated = bcryptjs.compare(credentials.pass, user.password);
 
       if (authenticated) {
@@ -30,12 +29,12 @@ const authenticateUser = async (req, res, next) => {
       message = `User not found with email address: ${credentials.name}`;
     }
   } else {
-    message = `Authorization header not found. You are not authorized to create a course.`;
+    message = `Authorization header not found.`;
   }
 
   if (message) {
     console.warn(message);
-    res.status(401).json({ errors: message });
+    res.status(401).json({ errors: [message] });
   } else {
     next();
   }

@@ -155,10 +155,6 @@ export default class UpdateCourse extends Component {
         this.props.history.push(`/forbidden`);
       } else if (errors.errors) {
         this.setState({ errors: errors.errors});
-      } else if (errors.message) {
-        let errorList = [];
-        errorList.push(errors.message);
-        this.setState({ errors: errors.message});
       } else {
         const id = this.state.courseId;
         this.props.history.push(`/courses/${id}`);
