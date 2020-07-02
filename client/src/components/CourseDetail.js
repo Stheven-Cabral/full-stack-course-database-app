@@ -5,7 +5,7 @@ export default class CourseDetail extends Component {
   state = {
     courseDetails: {},
     user: {},
-    materials: []
+    materials: [],
   };
 
   componentDidMount() {
@@ -25,7 +25,8 @@ export default class CourseDetail extends Component {
         this.setState({
           courseDetails: response.course,
           user: response.course.User,
-          materials: materials
+          materials: materials,
+          authenticatedUser: context.authenticatedUser
         });
       } else {
         this.props.history.push('/notfound');
@@ -41,7 +42,8 @@ export default class CourseDetail extends Component {
     const {
       courseDetails,
       user,
-      materials
+      materials,
+      authenticatedUser
     } = this.state;
 
     return (
@@ -50,8 +52,14 @@ export default class CourseDetail extends Component {
           <div className="bounds">
             <div className="grid-100">
               <span>
-                <Link className="button" to={`/courses/${courseDetails.id}/update`}>Update Course</Link>
-                <Link className="button" to={`/courses/delete/${courseDetails.id}`}>Delete Course</Link>
+                {authenticatedUser ?
+                  <React.Fragment>
+                    <Link className="button" to={`/courses/${courseDetails.id}/update`}>Update Course</Link>
+                    <Link className="button" to={`/courses/delete/${courseDetails.id}`}>Delete Course</Link>
+                  </React.Fragment>
+                  :
+                  <hr />
+                }
               </span>
               <Link className="button button-secondary" to="/">Return to List</Link>
             </div>
