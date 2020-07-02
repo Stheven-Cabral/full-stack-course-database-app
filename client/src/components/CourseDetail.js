@@ -57,11 +57,14 @@ export default class CourseDetail extends Component {
           <div className="bounds">
             <div className="grid-100">
               <span>
-                {authenticatedUser.emailAddress === user.emailAddress ?
-                  <React.Fragment>
-                    <Link className="button" to={`/courses/${courseDetails.id}/update`}>Update Course</Link>
-                    <Link className="button" to={`/courses/delete/${courseDetails.id}`}>Delete Course</Link>
-                  </React.Fragment>
+                {authenticatedUser ?
+                  authenticatedUser.emailAddress === user.emailAddress ?
+                    <React.Fragment>
+                      <Link className="button" to={`/courses/${courseDetails.id}/update`}>Update Course</Link>
+                      <Link className="button" to={`/courses/delete/${courseDetails.id}`}>Delete Course</Link>
+                    </React.Fragment>
+                    :
+                    <hr />
                   :
                   <hr />
                 }
