@@ -65,7 +65,7 @@ export default class Data {
       });
     }
     else {
-      throw new Error ('Error: Something Went Wrong')
+      throw new Error ()
     }
   }
 
@@ -80,7 +80,7 @@ export default class Data {
       });
     }
     else {
-      throw new Error ('Error: Something Went Wrong')
+      throw new Error ()
     }
   }
 

@@ -12,6 +12,10 @@ export default class Courses extends Component {
     context.data.getCourses()
     .then(response => {
       this.setState({courses: response.courses});
+    })
+    .catch(error => {
+      console.log(error);
+      this.props.history.push('/error')
     });
   }
 
