@@ -14,20 +14,22 @@ export default class CourseDetail extends Component {
     
     context.data.getCourseDetails(id)
     .then(response => {
-      let materials = response.course.materialsNeeded;
-      // console.log(response);
+      if (response) {
+        let materials = response.course.materialsNeeded;
+        if(materials !== null) {
+          materials = materials.split('\n');
+        } else {
+          materials = [];
+        }
 
-      if(materials !== null) {
-        materials = materials.split('\n');
+        this.setState({
+          courseDetails: response.course,
+          user: response.course.User,
+          materials: materials
+        });
       } else {
-        materials = [];
+        this.props.history.push('/notfound');
       }
-
-      this.setState({
-        courseDetails: response.course,
-        user: response.course.User,
-        materials: materials
-      });
     });
   }
   

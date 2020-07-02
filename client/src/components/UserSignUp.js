@@ -101,14 +101,14 @@ export default class UserSignUp extends Component {
         if (errors.length) {
           this.setState({ errors: errors});
         } else {
-          context.action.signIn(emailAddress, password)
+          context.actions.signIn(emailAddress, password)
           this.props.history.push('/');
         }
       })
       // handle rejected promises
       .catch(err => {
         console.log(err);
-        // this.props.history.push('/error'); // push to history stack
+        this.props.history.push('/error'); // push to history stack
       })
     }
   }

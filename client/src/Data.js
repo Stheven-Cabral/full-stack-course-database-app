@@ -43,7 +43,7 @@ export default class Data {
     if (response.status === 200) {
       return response.json().then(data => data);
     }
-    else if (response.status === 400) {
+    else if (response.status === 404) {
       return null;
     }
     else {
@@ -117,7 +117,8 @@ export default class Data {
     }
     else if (response.status === 400 || response.status === 405) {
       return response.json().then(data => {
-        return data.error;
+        console.log(data);
+        return data.errors;
       });
     }
     else {

@@ -14,32 +14,39 @@ export default class UpdateCourse extends Component {
 
   componentDidMount() {
     const{ context } = this.props;
+    const{ authenticatedUser } = context;
     const{ id } = this.props.match.params;
+
     context.data.getCourseDetails(id)
     .then(response => {
-      console.log(response);
-      const user = response.course.User;
-      this.setState({
-        courseId: id,
-        title: response.course.title,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        description: response.course.description,
-        estimatedTime: response.course.estimatedTime,
-        materialsNeeded: response.course.materialsNeeded,
-      })
+      if (response) {
+        const user = response.course.User;
+        this.setState({
+          courseId: id,
+          title: response.course.title,
+          courseByFirstName: user.firstName,
+          courseByLastName: user.lastName,
+          courseByEmailAddress: user.emailAddress,
+          description: response.course.description,
+          estimatedTime: response.course.estimatedTime,
+          materialsNeeded: response.course.materialsNeeded,
+          authenticatedUserEmailAddress: authenticatedUser.emailAddress
+        })
+      } else {
+        this.props.history.push('/notfound');
+      }
     })
   }
 
   render() {
     const{ 
       title,
-      firstName,
-      lastName,
+      courseByFirstName,
+      courseByLastName,
       description,
       estimatedTime,
       materialsNeeded,
-      errors
+      errors,
      } = this.state;
 
     return (
@@ -67,7 +74,7 @@ export default class UpdateCourse extends Component {
                 <div>
                   <input onChange={this.change} id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." value={title} />
                 </div>
-                <p>By {firstName} {lastName}</p>
+                <p>By {courseByFirstName} {courseByLastName}</p>
               </div>
 
               <div className="course--description">
@@ -126,7 +133,9 @@ export default class UpdateCourse extends Component {
       title,
       description,
       estimatedTime,
-      materialsNeeded
+      materialsNeeded,
+      courseByEmailAddress,
+      authenticatedUserEmailAddress
     } = this.state;
 
     const updatedCourse = {
@@ -138,7 +147,9 @@ export default class UpdateCourse extends Component {
 
     context.data.updateCourse(courseId, updatedCourse, emailAddress, password)
     .then(errors => {
-      if (errors.errors) {
+      if (courseByEmailAddress !== authenticatedUserEmailAddress) {
+        this.props.history.push(`/forbidden`);
+      } else if (errors.errors) {
         this.setState({ errors: errors.errors});
       } else if (errors.message) {
         let errorList = [];

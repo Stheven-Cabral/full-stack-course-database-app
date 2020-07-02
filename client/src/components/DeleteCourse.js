@@ -10,11 +10,15 @@ export default class DeleteCourse extends Component {
     const { id } = this.props.match.params;
     context.data.getCourseDetails(id)
     .then(response => {
-      this.setState({
-        course: response.course,
-        emailAddress: context.authenticatedUser.emailAddress,
-        password: context.authenticatedUser.password
-      })
+      if (response) {
+        this.setState({
+          course: response.course,
+          emailAddress: context.authenticatedUser.emailAddress,
+          password: context.authenticatedUser.password
+        })
+      } else {
+        this.props.history.push('/notfound');
+      }
     });
   }
 
@@ -31,12 +35,17 @@ export default class DeleteCourse extends Component {
     )
   }
 
-  confirmDelete = () => {
+  confirmDelete = (e) => {
+    e.preventDefault();
     const { context }= this.props;
     const { course, emailAddress, password } = this.state;
     context.data.deleteCourse(course.id, emailAddress, password)
-    .then(() => {
-      this.props.history.push('/')
+    .then((errors) => {
+      if (errors.length) {
+        this.props.history.push('/forbidden');
+      } else {
+        this.props.history.push('/');
+      }
     });
   }
 

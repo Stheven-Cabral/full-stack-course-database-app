@@ -94,7 +94,7 @@ router.put('/courses/:id', authenticateUser, asyncHandler( async (req, res, next
   } else {
     res.status(403).json({
       message: "Something went wrong.",
-      error: 'You are not authorized to edit this course.'});
+      errors: 'You are not authorized to edit this course.'});
   }
 }));
 
@@ -111,7 +111,9 @@ router.delete('/courses/:id', authenticateUser, asyncHandler(async (req, res) =>
     });
     res.status(204).end();
   } else {
-    res.status(403).json({message: 'You are not authorized to delete this course.'});
+    res.status(403).json({
+      message: 'Something went wrong', 
+      errors: 'You are not authorized to delete this course.'});
   }
 }));
 
