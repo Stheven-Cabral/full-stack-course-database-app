@@ -1,4 +1,5 @@
 
 export default {
-  apiBaseUrl: 'http://localhost:5000/api',
+  // Removed http://localhost:5000 for deployment.
+  apiBaseUrl: '/api',
 };

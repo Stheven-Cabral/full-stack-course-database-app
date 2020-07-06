@@ -1,0 +1,25 @@
+{
+  "name": "full-stack-course-database-app",
+  "version": "1.0.0",
+  "description": "tenth full stack javascript tech degree project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd api && npm install && npm start",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "engines": {
+    "node": "12.16.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stheven-Cabral/full-stack-course-database-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Stheven-Cabral/full-stack-course-database-app/issues"
+  },
+  "homepage": "https://github.com/Stheven-Cabral/full-stack-course-database-app#readme"
+}
